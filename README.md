@@ -1,2 +1,2 @@
 # EShopMicroServices
-Microservices A Humble Beginning
+Microservices Humble Beginnings
