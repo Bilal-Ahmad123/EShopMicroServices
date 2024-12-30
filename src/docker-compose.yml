@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   catalogdb:
-    image: circleci/postgres:9-bullseye-ram
+    image: circleci/postgres:10-bullseye-ram
 
 volumes:
   postgres_catalog:
