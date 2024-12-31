@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.CQRS;
+using Catalog.API.Models;
 
 namespace Catalog.API.Products.CreateProduct
 {
@@ -9,9 +10,9 @@ namespace Catalog.API.Products.CreateProduct
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            var product = new Catalog.API.Models.Products
+            var product = new Product
             {
-                id = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Name = command.Name,
                 Description = command.Description,
                 Price = command.Price,
@@ -20,7 +21,7 @@ namespace Catalog.API.Products.CreateProduct
             };
             session.Store(product);
             await session.SaveChangesAsync(cancellationToken);
-            return new CreateProductResult(product.id);
+            return new CreateProductResult(product.Id);
         }
     }
 }
