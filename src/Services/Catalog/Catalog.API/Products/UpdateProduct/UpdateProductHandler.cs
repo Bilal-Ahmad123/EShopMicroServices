@@ -22,7 +22,7 @@ namespace Catalog.API.Products.UpdateProduct
         public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
         {
             var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
-            if (product is null) throw new ProductNotFoundException();
+            if (product is null) throw new ProductNotFoundException(command.Id);
             product.Name = command.Name;
             product.Description = command.Description;
             product.Price = command.Price;
