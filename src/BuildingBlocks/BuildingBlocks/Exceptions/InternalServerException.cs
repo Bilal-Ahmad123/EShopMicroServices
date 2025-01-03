@@ -19,6 +19,6 @@ namespace BuildingBlocks.Exceptions
             Details = details;
         }
 
-        public string Details { get; }
+        public string? Details { get; }
     }
 }
