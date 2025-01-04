@@ -1,5 +1,8 @@
 
 
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
@@ -9,6 +12,8 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database"));
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddMarten(opts =>
 {
@@ -21,5 +26,9 @@ if(builder.Environment.IsDevelopment())
 }
 var app = builder.Build();
 app.MapCarter();
+app.UseHealthChecks("/health",new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.UseExceptionHandler(options => { });
 app.Run();
