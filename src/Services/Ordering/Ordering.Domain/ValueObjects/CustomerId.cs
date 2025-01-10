@@ -20,4 +20,5 @@ namespace Ordering.Domain.ValueObjects
 
             return new CustomerId(value);
         }
+    }
 }
