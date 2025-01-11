@@ -23,6 +23,4 @@ namespace Ordering.Domain.Abstractions
             _domainEvents.Add(domainEvent);
         }
     }
-    {
-    }
 }
