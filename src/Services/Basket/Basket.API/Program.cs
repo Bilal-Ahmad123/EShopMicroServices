@@ -1,4 +1,6 @@
 
+using BuildingBlocks.Messaging.MassTransit;
+
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 builder.Services.AddCarter();
@@ -8,6 +10,9 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
+builder.Services.AddMessageBroker(builder.Configuration);
+
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddMarten(opts =>
 {
